@@ -1,1 +1,73 @@
-<p>admin works!</p>
+<div class="container py-0 py-md-5">
+    <div class="col col-md-10 card bg-dark text-white mx-auto mt-5">
+        <form class="col" [formGroup]="myForm" (ngSubmit)="submitHandler()">
+            <div class="d-flex flex-column bd-highlight mb-3">
+                <div class="p-md-2 d-flex flex-column flex-md-row bd-highlight">
+                    <div class="col col-md-6 p-2 bd-highlight">
+                        <label class="form-label text-warning">Title</label>
+                        <input type="text" class="form-control" formControlName="title"
+                            placeholder="e.g The Boss Baby: Family Business">
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+                    <div class="col col-md-6 p-2 bd-highlight">
+                        <label class="form-label text-warning">Director</label>
+                        <input type="text" class="form-control" placeholder="e.g Tom McGrath"
+                            formControlName="director">
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+                </div>
+                <div class="p-0 p-md-2 d-flex flex-row bd-highlight">
+                    <div class="col p-2 bd-highlight">
+                        <label class="form-label text-warning">Image URL
+                            <span class="text-white">(Optional)</span></label>
+                        <input type="text" class="form-control" placeholder="https://" formControlName="director">
+                    </div>
+                </div>
+                <div class="p-0 p-md-2 d-flex flex-row bd-highlight">
+                    <div class="col p-2 bd-highlight">
+                        <label class="form-label text-warning">Sypnosis
+                            <span class="text-white">(Optional)</span></label>
+                        <textarea class="form-control" rows="3" formControlName="description"></textarea>
+                    </div>
+                </div>
+                <div class="p-md-2 d-flex flex-column flex-md-row bd-highlight" formArrayName="casts">
+                    <div class="col p-2 bd-highlight">
+                        <label class="form-label text-warning">Casts<span class="text-white">
+                                (Optional)</span></label>
+                        <button class="btn btn-sm btn-link float-right" type="button" (click)="addCast()"><i
+                                class="bi bi-plus-lg"></i> Add</button>
+                        <div class="row row-cols-2 row-cols-md-4 mb-2">
+                            <div class="col input-group mb-2" *ngFor="let cast of castForms.controls; let i=index"
+                                [formGroupName]="i">
+                                <input type="text" class="form-control" formControlName="name">
+                                <div class="input-group-append">
+                                    <button class="btn btn-danger" type="button" (click)="deleteCast(i)"><i
+                                            class="bi bi-trash-fill"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-md-2 d-flex flex-column flex-md-row bd-highlight">
+                    <div class="col col-md-6 p-2 bd-highlight">
+                        <label for="email" class="form-label text-warning">Rating <span
+                                class="text-white">(Optional)</span></label>
+                        <input type="number" class="form-control" placeholder="5.0" formControlName="rating">
+                    </div>
+                    <div class="col col-md-6 p-2 bd-highlight">
+                        <label for="email" class="form-label text-warning">Release Date <span
+                                class="text-white">(Optional)</span></label>
+                        <input type="number" class="form-control" placeholder="e.g 2020">
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-2 ml-auto">
+                <button class="btn btn-warning btn-block mb-3" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

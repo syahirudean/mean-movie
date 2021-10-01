@@ -17,3 +17,7 @@ export interface Info {
   description?: string;
   rating?: number;
 }
+
+export interface Cast {
+  name: string;
+}
