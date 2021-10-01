@@ -1,0 +1,43 @@
+<div class="container" *ngIf="data.movie | async as movie; else empty">
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col">
+            <img [src]="movie?.imgURL" class="img-thumbnail" alt="...">
+        </div>
+        <div class="col p-4">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.title }} <i class="bi bi-star-fill text-warning"></i><span
+                            class="lead"> {{
+                            movie.rating }}</span></h5>
+                    <small><u>Release date: {{ movie.release_date }}</u></small>
+                    <h6 class="card-subtitle mb-2 text-warning mt-3">Synopsis</h6>
+                    <p class="card-text">{{ movie.description }}</p>
+                    <p class="card-text">{{ movie.director }}</p>
+                    <h6 class="card-subtitle mb-2 text-warning">Casts</h6>
+                    <p class="card-text">
+                        <span *ngFor="let cast of movie.casts">{{ cast }}, </span>
+                    </p>
+                    <!--edit button-->
+                    <button class="btn btn-warning float-right" (click)="openModal(template)">
+                        <i class="bi bi-pencil-fill"></i>
+                        Edit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #template>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Modal</h4>
+            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                <span aria-hidden="true" class="visually-hidden">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <app-edit-info [movie]="movie"></app-edit-info>
+        </div>
+    </ng-template>
+</div>
+<ng-template #empty>
+</ng-template>

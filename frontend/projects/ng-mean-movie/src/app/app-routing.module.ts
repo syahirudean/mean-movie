@@ -12,11 +12,15 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/home/home.module').then((m) => m.HomeModule),
   },
-
   {
     path: 'admin',
     loadChildren: () =>
       import('./features/admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: 'movie', // TODO: add id param
+    loadChildren: () =>
+      import('./features/info/info.module').then((m) => m.InfoModule),
   },
   { path: '**', redirectTo: 'home' },
 ];

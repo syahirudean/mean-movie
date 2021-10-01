@@ -10,7 +10,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [AppRoutingModule, CoreModule, FormsModule, HttpClientModule, BrowserAnimationsModule],
+  imports: [
+    AppRoutingModule,
+    CoreModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
