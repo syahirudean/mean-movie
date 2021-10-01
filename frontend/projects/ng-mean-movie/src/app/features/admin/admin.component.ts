@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { DataService } from '../../core/services/data.service';
+import { Movie } from '../../shared/models/movie';
 
 @Component({
   selector: 'app-admin',
@@ -11,8 +15,9 @@ export class AdminComponent implements OnInit {
   // Form state
   loading = false;
   success = false;
+  movies$!: Observable<Movie[]>;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private data: DataService) {}
 
   ngOnInit() {
     this.myForm = this.fb.group({
@@ -42,18 +47,24 @@ export class AdminComponent implements OnInit {
     this.castForms.removeAt(i);
   }
 
+  fetchAll(): Observable<Movie[]> {
+    return this.data.fetchAll();
+  }
+
+  post(movieDetails: Movie): void {
+    console.log(movieDetails);
+    if (!movieDetails) return;
+
+    this.movies$ = this.data
+      .post(movieDetails)
+      .pipe(tap(() => (this.movies$ = this.fetchAll())));
+  }
+
   async submitHandler() {
     this.loading = true;
 
     const formValue = this.myForm.value;
-    console.log(formValue);
-    // try {
-    //   //TODO: hook to backend
-    //   console.log(formValue);
-    //   this.success = true;
-    // } catch (err) {
-    //   console.error(err);
-    // }
+    this.post(formValue);
 
     this.loading = false;
   }

@@ -2,21 +2,21 @@
     <div class="row py-lg-5 banner">
     </div>
 </section>
-<div class="container mt-5">
+<div class="container mt-5" *ngIf="data.movies as movies">
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col" *ngFor="let i of info">
+        <div class="col pointer" *ngFor="let movie of movies" routerLink="/movie">
             <div class="card shadow-sm bg-dark border-0">
-                <img [src]="info[0].imgURL" class="card-img-top fan-card" alt="...">
+                <img [src]="movie.imgURL" class="card-img-top fan-card" alt="...">
 
                 <div class="card-body text-white">
-                    <h5 class="truncate-text-1">{{ info[0].title }}</h5>
+                    <h5 class="truncate-text-1">{{ movie.title }}</h5>
                     <p class="truncate-text-2">
-                        {{ info[0].description }}
+                        {{ movie.description }}
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <small class="text-white lead">
-                            <i class="bi bi-star-fill text-warning"></i> {{ info[0].rating }}</small>
+                            <i class="bi bi-star-fill text-warning"></i> {{ movie.rating }}</small>
                         <div class="">
                             <button type="button" class="btn btn-sm btn-warning" routerLink="/movie">
                                 <i class="bi bi-info-circle"></i>
