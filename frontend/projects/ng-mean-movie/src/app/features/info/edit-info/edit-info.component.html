@@ -1,0 +1,32 @@
+<!--edit movie info form-->
+<form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="poster">Poster</label>
+        <input type="text" class="form-control" name="imgURL" [(ngModel)]="movie!.imgURL" required>
+    </div>
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" name="title" [(ngModel)]="movie!.title" required>
+    </div>
+    <div class="form-group">
+        <label for="title">Rating</label>
+        <input type="text" class="form-control" name="rating" [(ngModel)]="movie!.rating" required>
+    </div>
+    <div class="form-group">
+        <label for="year">Release Date</label>
+        <input type="text" class="form-control" name="release_date" [(ngModel)]="movie!.release_date" required>
+    </div>
+    <div class="form-group">
+        <label for="director">Director</label>
+        <input type="text" class="form-control" name="director" [(ngModel)]="movie!.director" required>
+    </div>
+    <div class="form-group">
+        <label for="poster">Casts</label>
+        <input type="text" class="form-control" name="casts" [(ngModel)]="movie!.casts" required>
+    </div>
+    <div class="form-group">
+        <label for="synopsis">Synopsis</label>
+        <input type="text" class="form-control" name="description" [(ngModel)]="movie!.description" required>
+    </div>
+    <button type="submit" class="btn btn-warning float-right btn-block">Submit</button>
+</form>
