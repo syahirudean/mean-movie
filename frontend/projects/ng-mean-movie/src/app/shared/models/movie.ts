@@ -4,7 +4,7 @@ export interface Movie {
   title?: string;
   description?: string;
   director?: string;
-  casts?: string[];
+  casts?: string;
   release_date?: number;
   rating?: number;
   date_created?: number;
@@ -16,8 +16,4 @@ export interface Info {
   title?: string;
   description?: string;
   rating?: number;
-}
-
-export interface Cast {
-  name: string;
 }
