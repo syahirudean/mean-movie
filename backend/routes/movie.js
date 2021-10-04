@@ -1,18 +1,29 @@
-// const express = require('express');
+const express = require('express');
+const { body } = require('express-validator');
+const moviesController = require('./../controllers/movie');
+const auth = require('./../middleware/auth');
 
-// const movieController = require('../controllers/movie');
+const router = express.Router();
 
-// const router = express.Router();
+router.get('/', moviesController.fetchAll);
 
-// const auth = require('../middleware/auth');
+router.post(
+  '/',
+  [
+    auth,
+    body('imgURL').not().isEmpty(),
+    body('title').not().isEmpty(),
+    body('description').not().isEmpty(),
+    body('director').not().isEmpty(),
+    body('casts').not().isEmpty(),
+    body('release_date').not().isEmpty().isNumeric(),
+    body('rating').not().isEmpty().isNumeric(),
+    body('date_created').not().isEmpty().isNumeric(),
+  ],
+  moviesController.postMovie
+);
 
-// router.get('/', movieController.getAllMovies);
+//  PARAMETER ROUTE
+router.delete('/:id', auth, moviesController.deleteMovie);
 
-// router.post('/', auth, movieController.postMovie);
-
-// router.put('/', auth, movieController.putMovie);
-
-// //  PARAMETER ROUTE
-// router.delete('/:id', auth, movieController.deleteMovie);
-
-// module.exports = router;
+module.exports = router;
