@@ -16,7 +16,7 @@
                     <p class="card-text">{{ movie.director }}</p>
                     <h6 class="card-subtitle mb-2 text-warning">Casts</h6>
                     <p class="card-text">
-                        <span *ngFor="let cast of movie.casts">{{ cast }}, </span>
+                        {{ movie.casts }}
                     </p>
                     <!--edit button-->
                     <button class="btn btn-warning float-right" (click)="openModal(template)">
