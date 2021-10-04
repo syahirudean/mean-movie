@@ -64,7 +64,26 @@ export class AdminComponent implements OnInit {
     this.loading = true;
 
     const formValue = this.myForm.value;
-    this.post(formValue);
+
+    let casts: string[] = [];
+
+    for (let i in formValue.casts) {
+      casts.push(formValue.casts[i].name);
+    }
+
+    const formatForm = {
+      imgURL: formValue.imgURL,
+      title: formValue.title,
+      description: formValue.description,
+      director: formValue.director,
+      casts: casts.join(', '),
+      release_date: formValue.release_date,
+      rating: formValue.rating,
+      date_created: formValue.date_created,
+    };
+
+    console.log(formatForm);
+    // this.post(formValue);
 
     this.loading = false;
   }

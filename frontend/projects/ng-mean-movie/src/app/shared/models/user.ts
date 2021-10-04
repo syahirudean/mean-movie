@@ -1,7 +1,6 @@
 export interface User {
-    id?: number;
-    imgURL?: string;
-    title?: string;
-    description?: string;
-    rating?: number;
-  }
+  id?: number;
+  admin?: boolean;
+  email?: string;
+  password?: string;
+}
