@@ -2,7 +2,7 @@
     <div class="row py-lg-5 banner">
     </div>
 </section>
-<div class="container mt-5" *ngIf="data.movies as movies">
+<div class="container mt-5" *ngIf="data.movies as movies; else empty">
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col pointer" *ngFor="let movie of movies" routerLink="/movie">
@@ -30,3 +30,13 @@
 
     </div>
 </div>
+
+<ng-template #empty>
+    <div class="container">
+        <div class="d-flex bd-highlight justify-content-center align-conten-center">
+            <div class="bd-highlight display-4 text-warning">
+                No Movies Available...
+            </div>
+        </div>
+    </div>
+</ng-template>

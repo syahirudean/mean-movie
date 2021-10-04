@@ -1,2 +1,14 @@
 <app-header></app-header>
 <router-outlet></router-outlet>
+
+<!--AUTH MODAL-->
+<ng-template #authModal>
+    <div class="modal-header border-0">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body p-0 pb-4">
+        <app-auth></app-auth>
+    </div>
+</ng-template>

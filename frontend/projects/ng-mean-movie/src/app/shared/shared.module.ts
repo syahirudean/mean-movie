@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header/header.component';
 // VENDOR
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AuthComponent } from './auth/auth.component';
 
 const modules = [
   CommonModule,
@@ -18,7 +19,7 @@ const modules = [
   CarouselModule.forRoot(),
   ModalModule.forRoot(),
 ];
-const components: any = [HeaderComponent];
+const components: any = [HeaderComponent, AuthComponent];
 
 @NgModule({
   declarations: [...components],

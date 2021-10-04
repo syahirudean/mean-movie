@@ -1,0 +1,21 @@
+<div class="p-3 col col-md-10 mx-auto">
+    <h1 class="text-center">Welcome!</h1>
+    <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+        <div class="text-center mb-4">
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in as Admin</h1>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="e.g example@mail.com"
+                formControlName="email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" placeholder="Your 8 digit password">
+        </div>
+        <button class="btn btn-lg btn-warning btn-block" type="submit" [disabled]="!loginForm.valid">Sign in</button>
+        <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2020</p>
+    </form>
+</div>
