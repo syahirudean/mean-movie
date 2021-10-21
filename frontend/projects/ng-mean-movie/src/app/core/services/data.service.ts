@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 
 // RXJS
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap, map, catchError } from 'rxjs/operators';
+import { tap, map, catchError, first } from 'rxjs/operators';
 
 // MODELS
 import { Movie } from '../../shared/models/movie';
+import { User } from '../../shared/models/user';
 import { ErrorService } from './error.service';
 
 @Injectable({
@@ -15,7 +16,7 @@ import { ErrorService } from './error.service';
 export class DataService {
   // BUTTON SERVICE TO ADD SCHEDULE FROM COURSE.TS 👉 DATETIME-FORM.TS
   private callMovie = new BehaviorSubject<Movie>({});
-  privateURL = 'http://localhost:8080/movies';
+  private url = 'http://localhost:8080/movies';
   movie = this.callMovie.asObservable();
 
   httpOptions: { headers: HttpHeaders } = {
@@ -84,12 +85,53 @@ export class DataService {
 
   constructor(
     private http: HttpClient,
-    private errorHandlerService: ErrorService
+    private errorHandlerService: ErrorService,
   ) {}
 
-  update(grocery: Movie): Observable<any> {
+  fetchAll(): Observable<Movie[]> {
     return this.http
-      .put<Movie>(this.privateURL, grocery, this.httpOptions)
+      .get<Movie[]>(this.url, { responseType: 'json' })
+      .pipe(
+        catchError(this.errorHandlerService.handleError<Movie[]>('fetchAll', []))
+      );
+  }
+
+  createPost(
+    movie: Partial<Movie>,
+    _userId: Pick<User, 'id'>
+  ): Observable<Movie> {
+    return this.http
+      .post<Movie>(
+        this.url,
+        {
+          imgURL: movie.imgURL,
+          title: movie.title,
+          description: movie.description,
+          director: movie.director,
+          casts: movie.casts,
+          release_date: movie.release_date,
+          rating: movie.rating,
+          date_created: movie.date_created,
+        },
+        this.httpOptions
+      )
+      .pipe(
+        catchError(this.errorHandlerService.handleError<Movie>('createPost'))
+      );
+  }
+
+  update(movie: Movie): Observable<any> {
+    return this.http
+      .put<Movie>(this.url, movie, this.httpOptions)
       .pipe(catchError(this.errorHandlerService.handleError<any>('update')));
+  }
+
+  deletePost(postId: Pick<Movie, 'id'>): Observable<{}> {
+    return this.http
+      .delete<Movie>(`${this.url}/${postId}`, this.httpOptions)
+      .pipe(
+        first(),
+        catchError(this.errorHandlerService.handleError<Movie>('deletePost'))
+      );
   }
 }
