@@ -47,19 +47,6 @@ export class AdminComponent implements OnInit {
     this.castForms.removeAt(i);
   }
 
-  fetchAll(): Observable<Movie[]> {
-    return this.data.fetchAll();
-  }
-
-  post(movieDetails: Movie): void {
-    console.log(movieDetails);
-    if (!movieDetails) return;
-
-    this.movies$ = this.data
-      .post(movieDetails)
-      .pipe(tap(() => (this.movies$ = this.fetchAll())));
-  }
-
   async submitHandler() {
     this.loading = true;
 
@@ -83,7 +70,6 @@ export class AdminComponent implements OnInit {
     };
 
     console.log(formatForm);
-    // this.post(formValue);
 
     this.loading = false;
   }

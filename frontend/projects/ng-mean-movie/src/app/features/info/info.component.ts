@@ -10,7 +10,6 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class InfoComponent implements OnInit {
   modalRef?: BsModalRef;
   constructor(public data: DataService, private modalService: BsModalService) {
-    this.data.getMovie(6);
   }
 
   // MODAL CONFIG
