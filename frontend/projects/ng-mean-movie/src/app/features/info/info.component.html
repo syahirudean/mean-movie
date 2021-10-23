@@ -1,4 +1,4 @@
-<div class="container" *ngIf="data.movie | async as movie; else empty">
+<div class="container" *ngIf="movie$ | async as movie; else empty">
     <div class="row row-cols-1 row-cols-md-2">
         <div class="col">
             <img [src]="movie?.imgURL" class="img-thumbnail" alt="...">
@@ -16,7 +16,7 @@
                     <p class="card-text">{{ movie.director }}</p>
                     <h6 class="card-subtitle mb-2 text-warning">Casts</h6>
                     <p class="card-text">
-                        {{ movie.casts }}
+                        <span *ngFor="let cast of movie.casts">{{ cast }},</span>
                     </p>
                     <!--edit button-->
                     <button class="btn btn-warning float-right" (click)="openModal(template)">
@@ -36,7 +36,7 @@
             </button>
         </div>
         <div class="modal-body">
-            <app-edit-info [movie]="movie"></app-edit-info>
+            <app-edit-info [movieID]="movieID"></app-edit-info>
         </div>
     </ng-template>
 </div>

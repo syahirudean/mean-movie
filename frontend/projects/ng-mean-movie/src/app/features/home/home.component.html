@@ -2,10 +2,10 @@
     <div class="row py-lg-5 banner">
     </div>
 </section>
-<div class="container mt-5" *ngIf="data.movies as movies; else empty">
+<div class="container my-5" *ngIf="movies$ | async; else empty">
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col pointer" *ngFor="let movie of movies" routerLink="/movie">
+        <div class="col pointer" *ngFor="let movie of movies$ | async">
             <div class="card shadow-sm bg-dark border-0">
                 <img [src]="movie.imgURL" class="card-img-top fan-card" alt="...">
 
@@ -18,7 +18,7 @@
                         <small class="text-white lead">
                             <i class="bi bi-star-fill text-warning"></i> {{ movie.rating }}</small>
                         <div class="">
-                            <button type="button" class="btn btn-sm btn-warning" routerLink="/movie">
+                            <button type="button" class="btn btn-sm btn-warning" routerLink="/movie/{{ movie.id }}">
                                 <i class="bi bi-info-circle"></i>
                                 Info
                             </button>
