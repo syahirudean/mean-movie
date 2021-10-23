@@ -18,7 +18,7 @@ const routes: Routes = [
       import('./features/admin/admin.module').then((m) => m.AdminModule),
   },
   {
-    path: 'movie', // TODO: add id param
+    path: 'movie/:id', // TODO: add id param
     loadChildren: () =>
       import('./features/info/info.module').then((m) => m.InfoModule),
   },

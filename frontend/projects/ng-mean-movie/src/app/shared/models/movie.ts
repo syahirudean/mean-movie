@@ -1,5 +1,5 @@
 export interface Movie {
-  id?: number;
+  id?: string;
   imgURL?: string;
   title?: string;
   description?: string;
@@ -11,7 +11,7 @@ export interface Movie {
 }
 
 export interface Info {
-  id?: number;
+  id?: string;
   imgURL?: string;
   title?: string;
   description?: string;
