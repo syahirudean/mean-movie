@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header/header.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AuthComponent } from './auth/auth.component';
+import { ConfirmPasswordValidatorDirective } from './directives/confirm-password-validator.directive';
 
 const modules = [
   CommonModule,
@@ -22,7 +23,7 @@ const modules = [
 const components: any = [HeaderComponent, AuthComponent];
 
 @NgModule({
-  declarations: [...components],
+  declarations: [...components, ConfirmPasswordValidatorDirective],
   imports: [...modules],
   exports: [...components, ...modules],
 })

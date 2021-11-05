@@ -17,6 +17,8 @@ export class EditInfoComponent implements OnInit {
   movie!: Movie;
   private movieDoc!: AngularFirestoreDocument<Movie>;
 
+  laodingState? = false;
+
   constructor(public data: DataService, private afs: AngularFirestore) {}
 
   ngOnInit(): void {
@@ -27,14 +29,17 @@ export class EditInfoComponent implements OnInit {
   }
 
   onSubmit() {
+    this.laodingState = true;
     this.movieDoc = this.afs.doc<Movie>(`movies/${this.movieID}`);
     this.movieDoc
       .update(this.movie!)
       .then(() => {
+        this.laodingState = false;
         alert('Successfully updated!');
         this.data.sendCloseModalState(true);
       })
       .catch((err) => {
+        this.laodingState = false;
         alert(`Error: ${err}`);
         this.data.sendCloseModalState(true);
       });

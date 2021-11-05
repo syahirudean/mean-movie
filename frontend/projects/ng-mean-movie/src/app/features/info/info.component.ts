@@ -8,6 +8,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-info',
@@ -23,7 +24,8 @@ export class InfoComponent implements OnInit {
     private afs: AngularFirestore,
     public data: DataService,
     private modalService: BsModalService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public auth: AuthService
   ) {
     this.getMovie();
   }

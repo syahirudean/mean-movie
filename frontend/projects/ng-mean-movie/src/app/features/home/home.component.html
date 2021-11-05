@@ -3,6 +3,13 @@
     </div>
 </section>
 <div class="container my-5" *ngIf="movies$ | async; else empty">
+    <div *ngIf="auth.user$ | async as user; else showLogin">
+        USER
+    </div>
+    <ng-template #showLogin>
+        LOGIN
+    </ng-template>
+
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col pointer" *ngFor="let movie of movies$ | async">

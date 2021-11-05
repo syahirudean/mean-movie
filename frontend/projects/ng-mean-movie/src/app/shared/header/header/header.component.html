@@ -25,9 +25,15 @@
                         <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                     </div>
                     <div class="p-2 bd-highlight text-center">
-                        <button class="btn text-white" type="button" (click)="auth.authModal(true)">Sign
+                        <button class="btn text-white" type="button" (click)="auth.authModal(true)"
+                            *ngIf="!(auth.user$| async)">Sign
                             In</button>
-                        <button class="btn text-white" type="button" routerLink="/admin">Create</button>
+                        <button class="btn text-white" type="button" routerLink="/admin"
+                            *ngIf="auth.user$ | async">Create</button>
+                        <button class="btn text-white" type="button" *ngIf="auth.user$ | async"
+                            (click)="auth.onSignOut()">Sign
+                            out
+                        </button>
                     </div>
                 </div>
             </div>

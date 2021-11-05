@@ -1,21 +1,98 @@
 <div class="p-3 col col-md-10 mx-auto">
     <h1 class="text-center">Welcome!</h1>
-    <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
-        <div class="text-center mb-4">
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in as Admin</h1>
-        </div>
+    <form #loginform="ngForm" (ngSubmit)="auth.emailSignin(loginDetails.email, loginDetails.password)"
+        *ngIf="!signupState; else signup">
+        <h3>Login</h3>
+        <p>Interested to be an admin? Signup <button class="btn btn-link btn-sm" type="button"
+                (click)="onSignup()">here</button>
+        </p>
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            placeholder="e.g example@mail.com"
-                formControlName="email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <label for="name">Email</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="loginDetails.email" name="email"
+                #email="ngModel" required>
+            <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                Email is required
+            </div>
         </div>
+
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" placeholder="Your 8 digit password">
+            <label for="alterEgo">Password</label>
+            <input type="password" class="form-control" id="alterEgo" [(ngModel)]="loginDetails.password"
+                name="password" #password="ngModel" required>
+            <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+                Password is required
+            </div>
         </div>
-        <button class="btn btn-lg btn-warning btn-block" type="submit" [disabled]="!loginForm.valid">Sign in</button>
-        <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2020</p>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary" [disabled]="!loginform.form.valid">Login</button>
+        </div>
     </form>
+
+    <ng-template #signup>
+        <form [formGroup]="signupForm" (ngSubmit)="auth.emailSignUp(signupForm)">
+            <h3>Signup</h3>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" formControlName="fullname" class="form-control"
+                    [ngClass]="{ 'is-invalid': f.fullname.touched && f.fullname.errors }" />
+                <span *ngIf="f.fullname.touched && f.fullname.errors" class="invalid-feedback">
+                    <span *ngIf="f.fullname.errors.required">Fullname is required</span>
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" formControlName="email" class="form-control"
+                    [ngClass]="{ 'is-invalid': f.email.touched  && f.email.errors }" />
+                <span *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
+                    <span *ngIf="f.email.errors.required">Email is required</span>
+                    <span *ngIf="f.email.errors.email">Your email does not look right</span>
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" formControlName="password" class="form-control"
+                    [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" />
+                <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">
+                        Password must be at least 8 characters
+                    </div>
+                    <div *ngIf="f.password.invalid && f.password.touched">
+                        That password sucks...
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" formControlName="confirmPassword" class="form-control"
+                    [ngClass]="{ 'is-invalid': f.confirmPassword.touched && f.confirmPassword.errors }" />
+                <div *ngIf="f.confirmPassword.touched && f.confirmPassword.errors" class="invalid-feedback">
+                    <div *ngIf="f.confirmPassword.errors.required">
+                        Confirm Password is required
+                    </div>
+                    <div *ngIf="f.confirmPassword.errors.matching">
+                        Confirm Password does not match
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group form-check">
+                <input type="checkbox" formControlName="acceptTerms" class="form-check-input"
+                    [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
+                <label for="acceptTerms" class="form-check-label">I have read and agree to the Terms</label>
+                <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">
+                    Accept Terms is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Sign up</button>
+                </div>
+            </div>
+        </form>
+    </ng-template>
 </div>

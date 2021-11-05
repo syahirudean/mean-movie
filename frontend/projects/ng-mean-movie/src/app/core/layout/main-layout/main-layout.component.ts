@@ -14,8 +14,6 @@ export class MainLayoutComponent implements OnInit {
 
   socialLogins: any = [{ title: 'Google' }, { title: 'Facebook' }];
 
-  // AUTH MODAL
-  // AUTH MODAL
 
   @ViewChild('authModal')
   authModal!: TemplateRef<HTMLDivElement>;
@@ -29,8 +27,7 @@ export class MainLayoutComponent implements OnInit {
   subscription?: Subscription;
 
   constructor(
-    private data: DataService,
-    private auth: AuthService,
+    public auth: AuthService,
     private modalService: BsModalService
   ) {}
 
